@@ -2,6 +2,7 @@
 #include<string>
 #include<ctime>
 #include<cstdlib>
+#include<cctype>
 
 using namespace std;
 
@@ -52,7 +53,7 @@ int main()
 
 	Common(array_1, array_2, 5, 7);
 	
-	cout << "\n\nEnter a sentence(without spaces, enter all the letters in lower or upper case) : ";
+	cout << "\n\nEnter a sentence: ";
 	getline(cin, user_string);
 
 	cout << "\n\n------------Palindrome Check---------------\n";
@@ -127,15 +128,41 @@ void Common(int a[], int b[],int l1,int l2)
 }
 bool is_Palindrome(string& user_string)
 {
-	int j = user_string.length() - 1;
-
-	for (int i = 0; i < j; i++)
+	for (int i = 0; i < user_string.length(); i++)
 	{
-		if (user_string[i] != user_string[j])
+		user_string[i] = tolower(user_string[i]);
+	}
+
+
+	for (int i = 0; i < user_string.length(); i++)
+	{
+
+		if (user_string[i] == ' ')
+		{
+			for (int j = i; j < user_string.length(); j++)
+			{
+				user_string[j] = user_string[j + 1];
+			}
+
+		}
+	}
+	for (int i = 0; i < user_string.length(); i++)
+	{
+		if (user_string != "")
+		{
+			user_string[i] = '\0';
+		}
+	}
+	cout << "\n" << user_string;
+
+
+	for (int i = 0; i < user_string.length(); i++)
+	{
+		if (user_string[i] != user_string[user_string.length()-1-i])
 		{
 			return false;
 		}
-		j--;
+		
 	}
 	return true;
 }
